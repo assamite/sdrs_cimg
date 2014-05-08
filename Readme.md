@@ -7,26 +7,27 @@ This is a platform independent version of Salient Region Detection and Segmentat
 
 Check also the [webpage](http://ivrgwww.epfl.ch/supplementary_material/RK_CVPR09/index.html) for the paper. 
 Nearly all of the code is same as [C++ sources](http://ivrgwww.epfl.ch/supplementary_material/RK_CVPR09/SourceCode/SalientRegionDetectorAndSegmenter.zip) given on the webpage. 
-*The conversion has been done with minimum amount of work so any input and/or change suggestions are welcome.*
 
 The differences are: 
 * Use of [CImg](http://cimg.sourceforge.net/) to handle picture loading and saving for platform independence
 * Changing the code to work as a command line tool
 * (TO BE IMPLEMENTED) adding python bindings
 
+*The conversion has been done with minimum amount of work so any input and/or change suggestions are welcome.*
+
 Usage
 ------------------------------------------------------
 
 1. Download CImg and put CImg.h some where your compiler finds it
 
-2. (optional) add additional image libraries (libpng, etc) to the Makefile's CImgHandler.o compile path so that CImg can load those types accordingly
+2. (optional) add additional image libraries (libpng, etc) to the Makefile's CImgHandler.o compile information so that CImg can load those types accordingly
 
 3. Run make (and make clean)
 
-4. Call the 'saliency' program created with
+4. Call the 'saliency' program created:
 
-> ./saliency [-s] pic1 pic2 pic3 ...
+`$> ./saliency [-s] path/to/pic1 path/to/pic2 path/to/pic3 ...`
 
 where optional '-s' argument tells the program to not only do saliency mapping, but also mean shift based processing and extracting the most salient objects from the pictures.
 
-The pictures are saved on the folder from where to code was run.
+The pictures are saved to the folder from where to code was run.
