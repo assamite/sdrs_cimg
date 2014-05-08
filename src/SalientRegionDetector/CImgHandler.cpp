@@ -58,8 +58,7 @@ void CImgHandler::GetPictureBuffer(
 //=================================================================================
 //	SavePicture
 //
-//	Saves the given buffer as a JPEG or BMP image depeding on which encoder CLSID
-//	is used.
+//	Saves the given buffer as a JPEG.
 //=================================================================================
 void CImgHandler::SavePicture(
 	vector<UINT>&		img,
@@ -89,7 +88,7 @@ void CImgHandler::SavePicture(
 	int idx = bn.find_last_of(".");
 	string name = bn.substr(0, idx);
 	name += suffix;
-	saveimg.save_jpeg(name.c_str(), 80);
+	saveimg.save_jpeg(name.c_str(), 100);
 }
 
 
