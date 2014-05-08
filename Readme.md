@@ -1,4 +1,4 @@
-Salient Region Detection and Segmentation using CImg.h
+Salient Region Detection and Segmentation using CImg
 ======================================================
 
 This is a platform independent version of Salient Region Detection and Segmentation technique represented in:
@@ -7,5 +7,5 @@ This is a platform independent version of Salient Region Detection and Segmentat
 
 Check also he [webpage](http://ivrgwww.epfl.ch/supplementary_material/RK_CVPR09/index.html) for the paper. 
 Nearly all of the code is borrowed from [C++ sources](http://ivrgwww.epfl.ch/supplementary_material/RK_CVPR09/SourceCode/SalientRegionDetectorAndSegmenter.zip) given on the webpage. 
-The only difference is the use of CImg.h (for platform independence) and changing it to a command line tool.
+The only difference is the use of [CImg](http://cimg.sourceforge.net/) (for platform independence) and changing it to a command line tool.
 

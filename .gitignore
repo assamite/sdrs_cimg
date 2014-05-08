@@ -23,6 +23,7 @@
 # Eclipse
 .cproject
 .project
+.settings
 Debug/
 
 # OS X
