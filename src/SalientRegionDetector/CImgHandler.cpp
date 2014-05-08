@@ -29,7 +29,7 @@ CImgHandler::~CImgHandler()
 //=================================================================================
 //	GetPictureBuffer
 //
-//	Returns a buffer of the picture just opened
+//	Returns a buffer of the picture just opened.
 //=================================================================================
 void CImgHandler::GetPictureBuffer(
 	string&				filename,
