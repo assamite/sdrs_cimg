@@ -25,4 +25,11 @@
 .project
 Debug/
 
+# OS X
+.DS_Store
 
+# Sample pics
+*.jpg
+
+# Builded program with Makefile
+saliency
