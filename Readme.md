@@ -38,10 +38,10 @@ Usage
 	
 	4.2 Instantiate SDRWrapper object:
 	
-	`from sdrWrapper import SDRWrapper
-	sdrw = SDRWrapper()
-	doSegmentation = True
-	sdrw.saliency("path/to/my/pic", doSegmentation)
-	`
+		from sdrWrapper import SDRWrapper
+		sdrw = SDRWrapper()
+		doSegmentation = True
+		sdrw.saliency("path/to/my/pic", doSegmentation)
+	
 	
 The pictures are saved to the folder from where to code was run.
