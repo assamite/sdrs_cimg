@@ -10,8 +10,8 @@ Nearly all of the code is same as [C++ sources](http://ivrgwww.epfl.ch/supplemen
 
 The differences are: 
 * Use of [CImg](http://cimg.sourceforge.net/) to handle picture loading and saving for platform independence
-* Changing the code to work as a command line tool
-* Adding Python wrapper for main functionality with ctypes
+* Changed the code to work as a command line tool
+* Added Python wrapper for main functionality with ctypes
 
 *The conversion has been done with minimum amount of work so any input and/or change suggestions are welcome.*
 
