@@ -5,7 +5,7 @@
 #define CIMGHANDLER_INCLUDED_
 
 #if !defined(UINT)
-#define UINT unsigned int
+#define UINT uint32_t
 #endif
 
 using namespace std;

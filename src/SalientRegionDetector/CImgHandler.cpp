@@ -44,7 +44,7 @@ void CImgHandler::GetPictureBuffer(
 
 	imgBuffer.resize(sz);
 	int x = 0, y = 0, R = 0, G = 0, B = 0;
-	for( int p = 0; p < sz; p++ ) {
+	for(int p = 0; p < sz; p++) {
 		x = p % width;
 		y = p / width;
 		R = img(x, y, 0, 0);

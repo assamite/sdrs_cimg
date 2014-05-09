@@ -22,6 +22,7 @@
 
 # Eclipse
 .cproject
+.pydevproject
 .project
 .settings
 Debug/

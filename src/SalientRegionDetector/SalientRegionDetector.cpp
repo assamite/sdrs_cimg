@@ -1,9 +1,5 @@
 /*
  * SalientRegionDetector.cpp
-
- *
- *  Created on: 7 May 2014
- *      Author: pihatonttu
  */
 
 #include <iostream>
@@ -263,20 +259,19 @@ void SalientRegionDetector::DoMeanShiftSegmentationBasedProcessing(
 }
 
 
-//===========================================================================
-///	OnBnClickedButtonDetectSaliency
-///
-///	The main function
-//===========================================================================
+/**
+ * Crux of the program.
+ *
+ *
+ */
 void SalientRegionDetector::DetectSaliency(
 		vector<string>&				picvec,
 		bool&						doSegmentation)
 {
 	CImgHandler cimgHand;
+	int numPics(picvec.size());
 
-	int numPics( picvec.size() );
-
-	for( int k = 0; k < numPics; k++ )
+	for(int k = 0; k < numPics; k++)
 	{
 		vector<UINT> img(0);
 		int width(0);
@@ -314,10 +309,18 @@ void SalientRegionDetector::DetectSaliency(
 
 int main(int argc, char* argv[])
 {
-
 	if ((argc == 2 && strncmp(argv[1], "-s", 2) == 0) || argc == 1) {
+		std::cerr << "This program implements the saliency detection and segmentation method described in:" << std::endl;
+		std::cerr << "R. Achanta, S. Hemami, F. Estrada and S. S�sstrunk, Frequency-tuned Salient Region Detection," << std::endl;
+		std::cerr << "IEEE International Conference on Computer Vision and Pattern Recognition (CVPR), 2009" << std::endl;
+		std::cerr << std::endl;
 		std::cerr << "Usage: " << argv[0] << " [-s] img1 img2..." << std::endl;
-		        return 1;
+		std::cerr << std::endl;
+		std::cerr << "By default only saliency map of the image is extracted. Mean shift based processing and most" << std::endl;
+		std::cerr << "salient object exraction can be enabled by using '-s' flag at the start of the arguments." << std::endl;
+		std::cerr << "Pictures created are saved on the current folder." << std::endl;
+		std::cerr << std::endl;
+		return 1;
 	}
 	vector<string> picvec(0);
 	bool doSegmentation = strncmp(argv[1], "-s", 2) == 0 ? true : false;
@@ -331,4 +334,29 @@ int main(int argc, char* argv[])
 	SDR.DetectSaliency(picvec, doSegmentation);
 }
 
+
+extern "C" {
+	/**
+	 * C style functions for python wrapper. Accepts only one picture.
+	 */
+	SalientRegionDetector* SalientRegionDetector_New()
+	{
+		return new SalientRegionDetector();
+	}
+
+	int saliency(SalientRegionDetector* sdr, char* pic, bool doSegmentation)
+	{
+		try
+		{
+			vector<string> picvec(0);
+			picvec.push_back(pic);
+			sdr->DetectSaliency(picvec, doSegmentation);
+		}
+		catch (int e)
+		{
+			return -1;
+		}
+		return 0;
+	}
+}
 

@@ -9,7 +9,7 @@
 #define _SALIENCY_H_INCLUDED_
 
 #if !defined(UINT)
-#define UINT unsigned int
+#define UINT uint32_t
 #endif
 
 #include <vector>
