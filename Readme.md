@@ -34,7 +34,7 @@ Usage
 	
 4. Inside Python:
 
-	4.1 Run make <shared_osx|shared_linux> (and make clean)
+	4.1 Run make shared_osx/shared_linux (and make clean)
 	
 	4.2 Instantiate SDRWrapper object:
 	
