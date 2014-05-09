@@ -1,4 +1,4 @@
-Salient Region Detection and Segmentation using CImg
+Salient Region Detection and Segmentation for Python Using CImg
 ======================================================
 
 This is a platform independent (not tested in Windows) version of Salient Region Detection and Segmentation technique represented in:
