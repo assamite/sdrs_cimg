@@ -65,6 +65,7 @@ public:
 	 * object extraction based on the segmentation.
 	 */
 	void DetectSaliency(
+		string&									outfolder,
 		vector<string>&							picvec,
 		bool&									doSegmentation);
 

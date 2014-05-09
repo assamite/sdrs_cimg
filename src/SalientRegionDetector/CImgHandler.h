@@ -26,6 +26,7 @@ public:
 										vector<UINT>&		imgBuffer,
 										int					width,
 										int					height,
+										string&				outFolder,
 										string&				outFilename,
 										string&				suffix);
 

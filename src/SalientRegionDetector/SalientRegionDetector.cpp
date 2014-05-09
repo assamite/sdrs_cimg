@@ -265,6 +265,7 @@ void SalientRegionDetector::DoMeanShiftSegmentationBasedProcessing(
  *
  */
 void SalientRegionDetector::DetectSaliency(
+		string&						outfolder,
 		vector<string>&				picvec,
 		bool&						doSegmentation)
 {
@@ -291,7 +292,7 @@ void SalientRegionDetector::DetectSaliency(
 			outimg[i] = val << 16 | val << 8 | val;
 		}
 		string suffix = "_salmap.jpg";
-		cimgHand.SavePicture(outimg, width, height, picvec[k], suffix);
+		cimgHand.SavePicture(outimg, width, height, outfolder, picvec[k], suffix);
 
 		if(doSegmentation)
 		{
@@ -300,40 +301,12 @@ void SalientRegionDetector::DetectSaliency(
 			DrawContoursAroundSegments(segimg, width, height, 0xffffff);
 			//DrawContoursAroundSegments(segobj, width, height, 0xffffff);
 			suffix = "_meanshift.jpg";
-			cimgHand.SavePicture(segimg, width, height, picvec[k], suffix);
+			cimgHand.SavePicture(segimg, width, height, outfolder, picvec[k], suffix);
 			suffix = "_salientobject.jpg";
-			cimgHand.SavePicture(segobj, width, height, picvec[k], suffix);
+			cimgHand.SavePicture(segobj, width, height, outfolder, picvec[k], suffix);
 		}
 	}
 }
-
-int main(int argc, char* argv[])
-{
-	if ((argc == 2 && strncmp(argv[1], "-s", 2) == 0) || argc == 1) {
-		std::cerr << "This program implements the saliency detection and segmentation method described in:" << std::endl;
-		std::cerr << "R. Achanta, S. Hemami, F. Estrada and S. S�sstrunk, Frequency-tuned Salient Region Detection," << std::endl;
-		std::cerr << "IEEE International Conference on Computer Vision and Pattern Recognition (CVPR), 2009" << std::endl;
-		std::cerr << std::endl;
-		std::cerr << "Usage: " << argv[0] << " [-s] img1 img2..." << std::endl;
-		std::cerr << std::endl;
-		std::cerr << "By default only saliency map of the image is extracted. Mean shift based processing and most" << std::endl;
-		std::cerr << "salient object exraction can be enabled by using '-s' flag at the start of the arguments." << std::endl;
-		std::cerr << "Pictures created are saved on the current folder." << std::endl;
-		std::cerr << std::endl;
-		return 1;
-	}
-	vector<string> picvec(0);
-	bool doSegmentation = strncmp(argv[1], "-s", 2) == 0 ? true : false;
-	int fimg = doSegmentation ? 2 : 1;
-	for (int i = fimg; i < argc; i++) {
-		string imgName = argv[i];
-		picvec.push_back(imgName);
-	}
-
-	SalientRegionDetector SDR;
-	SDR.DetectSaliency(picvec, doSegmentation);
-}
-
 
 extern "C" {
 	/**
@@ -344,13 +317,14 @@ extern "C" {
 		return new SalientRegionDetector();
 	}
 
-	int saliency(SalientRegionDetector* sdr, char* pic, bool doSegmentation)
+	int saliency(SalientRegionDetector* sdr, char* outfolder, char* pic, bool doSegmentation)
 	{
 		try
 		{
 			vector<string> picvec(0);
 			picvec.push_back(pic);
-			sdr->DetectSaliency(picvec, doSegmentation);
+			string of = outfolder;
+			sdr->DetectSaliency(of, picvec, doSegmentation);
 		}
 		catch (int e)
 		{
@@ -359,4 +333,55 @@ extern "C" {
 		return 0;
 	}
 }
+
+void printUsage(char * argv1)
+{
+	std::cerr << "This program implements the saliency detection and segmentation method described in:" << std::endl;
+	std::cerr << "R. Achanta, S. Hemami, F. Estrada and S. S�sstrunk, Frequency-tuned Salient Region Detection," << std::endl;
+	std::cerr << "IEEE International Conference on Computer Vision and Pattern Recognition (CVPR), 2009" << std::endl;
+	std::cerr << std::endl;
+	std::cerr << "Usage: " << argv1 << " [-s] [-o=path/to/outfolder/] img1 img2..." << std::endl;
+	std::cerr << std::endl;
+	std::cerr << "By default only saliency map of the image is extracted. Mean shift based processing and most" << std::endl;
+	std::cerr << "salient object exraction can be enabled by using '-s' flag at the start of the arguments." << std::endl;
+	std::cerr << std::endl;
+}
+
+int main(int argc, char* argv[])
+{
+	bool doSegmentation = false;
+	string outFolder = "";
+	vector<string> picvec(0);
+	if (argc == 1)
+	{
+		printUsage(argv[0]);
+		return 1;
+	}
+	for (int i = 1; i < argc; i++)
+	{
+		if (strncmp(argv[i], "-s", 2) == 0)
+		{
+			doSegmentation = true;
+		}
+		else if (strncmp(argv[i], "-o=", 3) == 0)
+		{
+			string a = argv[i];
+			outFolder = a.substr(3, a.length() -3);
+			std::cout << outFolder << std::endl;
+		}
+		else
+		{
+			picvec.push_back(argv[i]);
+		}
+	}
+	if (picvec.size() == 0)
+	{
+		printUsage(argv[0]);
+		return 1;
+	}
+	SalientRegionDetector SDR;
+	SDR.DetectSaliency(outFolder, picvec, doSegmentation);
+}
+
+
 

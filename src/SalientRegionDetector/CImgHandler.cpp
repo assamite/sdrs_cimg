@@ -9,7 +9,9 @@
 #include "libgen.h"
 #include <string>
 #include <iostream>
+#include <boost/filesystem.hpp>
 
+namespace fs = boost::filesystem;
 using namespace cimg_library;
 
 //=================================================================================
@@ -64,6 +66,7 @@ void CImgHandler::SavePicture(
 	vector<UINT>&		img,
 	int					width,
 	int					height,
+	string&				outFolder,
 	string&				outFilename,
 	string&				suffix)
 {
@@ -86,9 +89,12 @@ void CImgHandler::SavePicture(
 	strcpy(cstr, outFilename.c_str());
 	string bn = basename(cstr);
 	int idx = bn.find_last_of(".");
+	fs::path dir(outFolder);
 	string name = bn.substr(0, idx);
 	name += suffix;
-	saveimg.save_jpeg(name.c_str(), 100);
+	fs::path fn(name);
+	dir /= fn;
+	saveimg.save_jpeg(dir.c_str(), 100);
 }
 
 

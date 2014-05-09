@@ -13,6 +13,8 @@ The differences are:
 * Changed the code to work as a command line tool
 * Added Python wrapper for main functionality with ctypes
 
+Dependencies: CImg, boost, (libpng, libjpeg...)
+
 *The conversion has been done with minimum amount of work so any input and/or change suggestions are welcome.*
 
 Usage
@@ -28,7 +30,7 @@ Usage
 
 	3.2 Call the 'saliency' program created:
 
-	`$> ./saliency [-s] path/to/pic1 path/to/pic2 path/to/pic3 ...`
+	`$>./saliency [-s] [-o=path/to/outfolder/] path/to/pic1 path/to/pic2 path/to/pic3 ...`
 
 	where optional '-s' argument tells the program to not only do saliency mapping, but also mean shift based processing and extracting the most salient objects from the pictures.
 	
@@ -41,7 +43,5 @@ Usage
 		from sdrWrapper import SDRWrapper
 		sdrw = SDRWrapper()
 		doSegmentation = True
-		sdrw.saliency("path/to/my/pic", doSegmentation)
-	
-	
-The pictures are saved to the folder from where to code was run.
+		sdrw.saliency("path/to/outfolder", "path/to/my/pic", doSegmentation)
+
