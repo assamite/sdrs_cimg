@@ -291,7 +291,7 @@ void SalientRegionDetector::DetectSaliency(
 			int val = salmap[i] + 0.5;
 			outimg[i] = val << 16 | val << 8 | val;
 		}
-		string suffix = "_salmap.jpg";
+		string suffix = "_sm.jpg"; // saliency map
 		cimgHand.SavePicture(outimg, width, height, outfolder, picvec[k], suffix);
 
 		if(doSegmentation)
@@ -300,9 +300,9 @@ void SalientRegionDetector::DetectSaliency(
 			DoMeanShiftSegmentationBasedProcessing(img, width, height, picvec[k], salmap, 7,10,20, segimg, segobj);
 			DrawContoursAroundSegments(segimg, width, height, 0xffffff);
 			//DrawContoursAroundSegments(segobj, width, height, 0xffffff);
-			suffix = "_meanshift.jpg";
+			suffix = "_ms.jpg"; // mean shift
 			cimgHand.SavePicture(segimg, width, height, outfolder, picvec[k], suffix);
-			suffix = "_salientobject.jpg";
+			suffix = "_so.jpg"; // salient object
 			cimgHand.SavePicture(segobj, width, height, outfolder, picvec[k], suffix);
 		}
 	}
