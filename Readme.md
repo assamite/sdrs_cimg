@@ -11,34 +11,34 @@ Most of the code is unaltered from the [C++ sources](http://ivrgwww.epfl.ch/supp
 The differences are: 
 * Use of [CImg](http://cimg.sourceforge.net/) to handle picture loading and saving for platform independence
 * Changed the code to work as a command line tool
-* Added Python wrapper for main functionality with ctypes
+* Added `ctypes` Python wrapper for main functionality
 
-Dependencies: CImg, boost, (libpng, libjpeg...)
+Dependencies
+------------------------------------------------------
+* [CImg](http://cimg.sourceforge.net/): For loading and saving pictures.
+* [boost](http://www.boost.org/): Used for filepath manipulation. In case you don't want to use boost, you can alter the source of `CImgHandler::SavePictures`
+* Image libraries: Defaults are [libpng](http://www.libpng.org/pub/png/libpng.html) and [libjpeg](http://libjpeg.sourceforge.net/). Check CImg documentation for full list of supported formats.
 
 *The conversion has been done with minimum amount of work so any input and/or change suggestions are welcome.*
 
 Usage
 ------------------------------------------------------
 
-1. Download CImg and put `CImg.h` somewhere your compiler finds it
+1. As Command line tool:
 
-2. Download boost and configure it. Boost is only used for filepath manipulation. In case you don't want to use boost, you can alter the source of `CImgHandler::SavePictures`.
+	1.1 Compile program with `make` (and `make clean`)
 
-3. As Command line tool:
-
-	3.1 Compile program with `make` (and `make clean`)
-
-	3.2 Call the program created:
+	1.2 Call the program created:
 
 	`$>./saliency [-s] [-o=path/to/outfolder/] path/to/pic1 path/to/pic2 path/to/pic3 ...`
 
 	where optional '-s' argument tells the program to not only do saliency mapping, but also mean shift based processing and extracting the most salient objects from the pictures.
 	
-4. From Python:
+2. From Python:
 
-	4.1 Compile program as shared library with `make shared_osx` or `make shared_linux` (and `make clean`)
+	2.1 Compile program as shared library with `make shared_osx` or `make shared_linux` (and `make clean`)
 	
-	4.2 Instantiate `SDRWrapper` object in Python and call it:
+	2.2 Instantiate `SDRWrapper` object in Python and call it:
 	
 		from sdrWrapper import SDRWrapper
 		sdrw = SDRWrapper()
