@@ -1,7 +1,7 @@
 Salient Region Detection and Segmentation for Python Using CImg
 ======================================================
 
-This is a platform independent (not tested in Windows) version of Salient Region Detection and Segmentation technique represented in:
+This is an UNIX platform oriented version of Salient Region Detection and Segmentation technique represented in:
 
 [R. Achanta, S. Hemami, F. Estrada and S. Süsstrunk, Frequency-tuned Salient Region Detection, IEEE International Conference on Computer Vision and Pattern Recognition (CVPR 2009), pp. 1597 - 1604, 2009.](http://infoscience.epfl.ch/record/135217/files/1708.pdf)
 
@@ -11,7 +11,7 @@ Most of the code is unaltered from the [C++ sources](http://ivrgwww.epfl.ch/supp
 The differences are: 
 * Use of [CImg](http://cimg.sourceforge.net/) to handle picture loading and saving for platform independence
 * Changed the code to work as a command line tool
-* Added `ctypes` Python wrapper for main functionality
+* Added Python wrapper (with `ctypes`) for main functionality
 
 Dependencies
 ------------------------------------------------------
@@ -26,7 +26,7 @@ Usage
 
 1. As Command line tool:
 
-	1.1 Compile program with `make` (and `make clean`)
+	1.1 Compile program with `make`
 
 	1.2 Call the program created:
 
@@ -36,12 +36,20 @@ Usage
 	
 2. From Python:
 
-	2.1 Compile program as shared library with `make shared_osx` or `make shared_linux` (and `make clean`)
+	2.1 Compile program as shared library with `make shared_osx` or `make shared_linux`
 	
 	2.2 Instantiate `SDRWrapper` object in Python and call it:
 	
-		from sdrWrapper import SDRWrapper
-		sdrw = SDRWrapper()
-		doSegmentation = True
-		sdrw.saliency("path/to/outfolder", "path/to/my/pic", doSegmentation)
+	```python
+	from sdrWrapper import SDRWrapper
+	sdrw = SDRWrapper()
+	doSegmentation = True # Extract most salient objects
+	sdrw.saliency("path/to/outfolder", "path/to/my/pic", doSegmentation)
+	```
+	
+Created pictures are saved with different suffixes. For example, running code for bird.jpg will create three different files
+to the output folder when most salient objects are extracted: 
+* bird_sm.jpg - saliency map
+* bird_ms.jpg - mean shift based segmentation
+* bird_so.jpg - most salient object
 
