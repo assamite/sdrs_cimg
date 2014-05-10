@@ -1,4 +1,4 @@
-
+//
 // SalientRegionDetector.h : header file
 //
 //===========================================================================
@@ -12,8 +12,7 @@
 // Email: firstname.lastname@epfl.ch
 //////////////////////////////////////////////////////////////////////
 //===========================================================================
-//  Changed to command line tool using CImg instead of GDIplus by
-//  Simo Linkola
+//  Changed to use CImg by Simo Linkola
 //===========================================================================
 //	  This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by

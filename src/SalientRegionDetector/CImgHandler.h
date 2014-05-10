@@ -1,3 +1,6 @@
+/**
+ * CImgHandler.h
+ */
 #include <vector>
 #include <algorithm>
 
@@ -10,6 +13,9 @@
 
 using namespace std;
 
+/**
+ * Image save and load back end using CImg.
+ */
 class CImgHandler
 {
 public:
