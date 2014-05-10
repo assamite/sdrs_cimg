@@ -57,8 +57,7 @@ public:
 	 * Map saliency for given picture files and optionally do mean shift
 	 * segmentation and most salient object extraction.
 	 *
-	 * Saves the files to current folder.
-	 *
+	 * @param outfolder Output folder for the created pictures
 	 * @param picvec Vector of filepaths to the pictures
 	 * @param doSegmentation Apply mean shift segmentation and most salient
 	 * object extraction based on the segmentation.
